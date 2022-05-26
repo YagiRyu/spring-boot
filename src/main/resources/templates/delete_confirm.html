@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>delete screen</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<header class="Area_header">post delete</header>
+
+<div th:class="'alert ' + *{alert_class}"
+     role="alert"
+     th:id="flash-message"
+     th:if="${message}"
+     th:text="${message}"></div>
+
+<div class="Area_register">
+    <form th:action="@{/delete}"
+          th:method="post" th:object="${article}">
+        <table border="1"  class="Area_register_table">
+            <tr>
+                <td class="heading">name</td>
+                <td class="body" th:text="*{name}"></td>
+            </tr>
+            <tr>
+                <td class="heading">title</td>
+                <td class="body" th:text="*{title}"></td>
+            </tr>
+            <tr>
+                <td class="heading">content</td>
+                <td class="body">
+                <pre th:text="*{contents}"></pre>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    post KEY　<input type="password" value="" name="articleKey">
+                    <div th:if="${#fields.hasErrors('articleKey')}"
+                         class="alert-error"
+                         th:errors="*{articleKey}">
+                    </div>
+                    <button type="submit">delete</button>
+                    <button type="reset" onclick="history.back()">back</button>
+                </td>
+            </tr>
+        </table>
+
+        <input type="hidden" name="id" th:field="*{id}">
+        <input type="hidden" name="name" th:field="*{name}">
+        <input type="hidden" name="title" th:field="*{title}">
+        <input type="hidden" name="contents" th:field="*{contents}">
+    </form>
+</div>
+</body>
+</html>
